@@ -1,18 +1,7 @@
 defmodule Hangman do
-  @moduledoc """
-  Documentation for Hangman.
-  """
 
-  @doc """
-  Hello world.
+  alias Hangman.Game
 
-  ## Examples
+  defdelegate new_game(), to: Game
 
-      iex> Hangman.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end
