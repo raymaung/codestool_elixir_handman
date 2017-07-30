@@ -57,7 +57,19 @@ defmodule Hangman.Game do
   defp maybe_won(true), do: :won
   defp maybe_won(_), do: :good_guess
 
-  defp tally(_game) do
-    123
+  def tally(game) do
+    %{
+      game_state: game.game_state,
+      turns_left: game.turns_left,
+      letters: game.letters |> reveal_guessed(game.used)
+    }
   end
+
+  defp reveal_guessed(letters, used) do
+    letters
+    |> Enum.map(fn l -> reveal_letter(l, MapSet.member?(used, l)) end)
+  end
+
+  def reveal_letter(letter, _in_word = true), do: letter
+  def reveal_letter(_letter, _not_in_word), do: "_"
 end
