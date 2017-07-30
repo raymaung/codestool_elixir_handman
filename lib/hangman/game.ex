@@ -26,7 +26,7 @@ defmodule Hangman.Game do
     {game, tally(game)}
   end
 
-  defp accept_move(game, guess, _already_guessed = true) do
+  defp accept_move(game, _guess, _already_guessed = true) do
     Map.put(game, :game_state, :already_used)
   end
 
@@ -41,14 +41,23 @@ defmodule Hangman.Game do
     Map.put(game, :game_state, new_state)
   end
 
-  defp score_guess(game, _not_good_guess) do
-    game
+  defp score_guess(game = %{turns_left: 1}, _not_good_guess) do
+    %{game |
+      game_state: :lost,
+      turns_left: 0
+    }  end
+
+  defp score_guess(game = %{turns_left: turns_left}, _not_good_guess) do
+    %{game |
+      game_state: :bad_guess,
+      turns_left: turns_left - 1
+    }
   end
 
   defp maybe_won(true), do: :won
   defp maybe_won(_), do: :good_guess
 
-  defp tally(game) do
+  defp tally(_game) do
     123
   end
 end
