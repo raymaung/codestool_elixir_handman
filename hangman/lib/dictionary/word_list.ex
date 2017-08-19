@@ -1,7 +1,7 @@
-defmodule Hangman.Dictionary do
+defmodule Dictionary.WordList do
 
-  def random_word() do
-    word_list()
+  def random_word(word_list) do
+    word_list
     |> Enum.random()
   end
 
