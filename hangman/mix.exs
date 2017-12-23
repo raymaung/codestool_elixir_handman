@@ -16,7 +16,7 @@ defmodule Hangman.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [
-      mod: {Dictionary.Application, []},
+      mod: {Hangman.Application, []},
       extra_applications: [:logger]
     ]
   end
@@ -31,6 +31,8 @@ defmodule Hangman.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      { :dictionary, path: "../dictionary" }
+    ]
   end
 end
